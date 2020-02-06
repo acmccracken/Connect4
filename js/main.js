@@ -2,7 +2,7 @@ let grid = [[00, 01, 02, 003, 04, 05, 06], [10,11, 12, 13, 14, 15, 16], [20, 21,
 console.log(grid);
 let horz = 0;
 let vert = 0;
-let a = 6, b = 7, c, i, j, k, l;
+let a = 6, b = 7, c, i, j, k, l, m, n, y, z;
 
 function switchEm(i, j){
     l = i;
@@ -10,31 +10,52 @@ function switchEm(i, j){
     j = l;
 }
 
-for(x = 0; x < 2; x ++){
-    for(i = 0; i < a; i++){
+for(x = 0; x < 3; x ++){
+    for(i = 0, m = 2, k = 5; i < a; i++){
         horz = 0;
+        if(x === 2){
+            
+                n = m;
+            z = i, y = j;
+            l = i - 2;
+            if(l < 0){
+                l = 0;
+            }if(n < 0){
+                n = 0;
+            }
+        }
         for(j = 0; j < b; j++){
             if(x === 1){
                 l = i;
                 i = j;
                 j = l;
             }
-            console.log(grid[i][j]);
-            if(horz >= 0){
-                if(grid[i][j] === 1){
-                    horz+= 1;
-                }else if(grid[i][j] === -1){
-                    horz = -1;
-                }else if(grid[i][j] === 0){
-                    horz = 0;
-                }
-            }else if(horz <= 0){
-                if(grid[i][j] === -1){
-                    horz += -1;
-                }else if(grid[i][j] === 1){
-                    horz = 1;
-                }else if(grid[i][j] === 0){
-                    horz = 0;
+            if(x === 2){
+                z = i, y = j;
+                i = n, j = l;
+            }
+                //console.log(l);
+                //console.log(n);
+            if(/*(x < 2) ||*/((x === 2) && (n < 6) && ( l < 7))){
+                //console.log(l);
+                //console.log(n);
+                console.log(grid[i][j]);
+                if(horz >= 0){
+                    if(grid[i][j] === 1){
+                        horz+= 1;
+                    }else if(grid[i][j] === -1){
+                        horz = -1;
+                    }else if(grid[i][j] === 0){
+                        horz = 0;
+                    }
+                }else if(horz <= 0){
+                    if(grid[i][j] === -1){
+                        horz += -1;
+                    }else if(grid[i][j] === 1){
+                        horz = 1;
+                    }else if(grid[i][j] === 0){
+                        horz = 0;
+                    }
                 }
             }
             /*console.log(horz)
@@ -49,11 +70,24 @@ for(x = 0; x < 2; x ++){
             l = i;
             i = j;
             j = l;
+            }if(x === 2){
+            //console.log(l);
+            //console.log(n);
+            i = z;
+            j = y;
+            l++, n++;
             }
+            
         }
+        m--;
+        
     }
-    a++;
-    b--;
+    if(x === 0){
+        a++;
+        b--;
+    }if(x === 1){
+        a--;
+    }
 }
 /*for(j = 0; j < 7; j++){
   vert = 0;
