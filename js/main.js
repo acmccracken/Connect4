@@ -1,4 +1,99 @@
-let grid = [[00, 01, 02, 003, 04, 05, 06], [10,11, 12, 13, 14, 15, 16], [20, 21, 22, 23, 24, 25, 26], [30, 31, 32, 33, 34, 35, 36], [40, 41, 42, 43, 44, 45, 46], [50, 51, 52, 53, 54, 55, 56]];
+//constants
+let grid = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+
+//variables
+let turn = 1;
+let gridColumn;
+let gridRow;
+let winCount;
+
+
+//Event Listeners
+document.getElementById('clickables').addEventListener('click', clickGrid);
+
+
+
+//Functions
+
+
+function clickGrid(){
+    idx = parseInt(event.target.id.replace('B',''));
+    console.log(idx);
+    if(idx != 0){
+        gridRow = idx / 10;
+    }else{
+        gridRow = 0;
+    }
+    render(idx);
+}
+
+function addToGrid(){
+    grid[gridRow][gridColumn] = turn;
+    console.log(grid);
+}
+
+
+
+function render(){
+    
+    for(let i = 5; i >= 0; i--){
+        
+        if(grid[gridRow][i] == 0){
+            idx += i;
+            fillHole = document.getElementById(idx);
+            
+            if(turn > 0){
+                fillHole.style.backgroundColor = "black";
+            }
+            if(turn < 0){
+                fillHole.style.backgroundColor = "red";
+            }
+            gridColumn = i;
+            addToGrid(idx)
+            console.log(idx);
+            console.log(gridRow, gridColumn)
+            turn *= -1;
+            winCondition();
+            return;
+        }
+    }
+
+}
+
+function winCondition(){
+    
+    console.log(grid[gridRow][gridColumn]);
+    console.log(grid[gridRow][gridColumn + 1]);
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+let grid = [[00, 01, 02, 03, 04, 05, 06], [10,11, 12, 13, 14, 15, 16], [20, 21, 22, 23, 24, 25, 26], [30, 31, 32, 33, 34, 35, 36], [40, 41, 42, 43, 44, 45, 46], [50, 51, 52, 53, 54, 55, 56]];
 console.log(grid);
 let horz = 0;
 let vert = 0;
@@ -72,27 +167,27 @@ for(x = 0; x < 4; x ++){
                     }
                 }
             }
-            /*console.log(horz)
+            console.log(horz)
             if(horz ===4){
             console.log(" 1's wins")
             }
             if(horz ===-4){
             console.log(" -1's wins")
             }   
-            */
+            
            if(x === 1){
             l = i;
             i = j;
             j = l;
             }if(x === 2){
-            //console.log(l);
-            //console.log(n);
+            console.log(l);
+            console.log(n);
             i = z;
             j = y;
             l++, n++;
             }
             if(x === 3){
-            //console.log(l);
+            console.log(l);
             i = z;
             j = y;
             l++, o--;
@@ -111,33 +206,4 @@ for(x = 0; x < 4; x ++){
     }
 
 }
-/*for(j = 0; j < 7; j++){
-  vert = 0;
-  for(i = 0; i < 6; i++){
-    if(vert >= 0){
-      if(grid[i][j] === 1){
-        vert+= 1;
-      }else if(grid[i][j] === -1){
-        vert = -1;
-      }else if(grid[i][j] === 0){
-        vert = 0;
-      }
-    }else if(vert <= 0){
-      if(grid[i][j] === -1){
-        vert += -1;
-      }else if(grid[i][j] === 1){
-        vert = 1;
-      }else if(grid[i][j] === 0){
-        vert = 0;
-      }
-    }
-    console.log(vert);
-    if(vert ===4){
-      console.log(" 1's wins")
-    }
-    if(vert ===-4){
-      console.log(" -1's wins")
-    }   
-
-  }
-*/
+*/ 
