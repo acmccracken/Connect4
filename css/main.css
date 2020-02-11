@@ -16,12 +16,19 @@ table.board{
 
 th{
     border: 2px solid black;
-    height: 20px;
-    width: 40px;
+    width: 0;
+	height: 0;
+	border-left: 24px solid transparent;
+	border-right: 24px solid transparent;
+	border-top: 40px solid blue;
     background-color: white;
-    border-radius: 15px;
-    cursor:pointer;
-    
+    cursor:pointer; 
+}
+.blackhover:hover{
+    border-top: 40px solid black;
+}
+.redhover:hover{
+    border-top: 40px solid red;
 }
 
 td{
@@ -30,4 +37,10 @@ td{
     width: 40px;
     background-color: white;
     border-radius: 40px;
+}
+button{
+    font-size: 28px;
+    margin: 20px;
+    border-radius: 5px;
+    visibility: hidden;
 }

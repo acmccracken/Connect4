@@ -7,18 +7,28 @@ let gridColumn;
 let gridRow;
 let winCount, distance, counter;
 let columnCounter;
-
+let gameOver;
+//Cached Elements
+let changeColor = document.querySelectorAll('th.blackhover');
 
 //Event Listeners
 document.getElementById('clickables').addEventListener('click', clickGrid);
+document.getElementById('btn').addEventListener('click', replay);
 
 
 
 //Functions
+init();
 
+function init(){
+    gameOver = 0;
+}
 
 function clickGrid(){
     idx = parseInt(event.target.id.replace('B',''));
+    if(gameOver === 1){
+        return;
+    }
     //console.log(idx);
     if(idx != 0){
         gridColumn = idx / 10;
@@ -33,6 +43,21 @@ function addToGrid(){
     //console.log(grid);
 }
 
+function replay(){
+    document.getElementById("btn").style.visibility = "hidden";
+    grid = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+
+    for(i = 0; i < 70; i += 10){
+        for(j = 0; j < 6; j ++){
+        idx = i + j;
+        fillHole = document.getElementById(idx);
+        fillHole.style.backgroundColor = "white";
+        }
+    }
+    init();
+
+}
+
 
 
 function render(){
@@ -43,17 +68,28 @@ function render(){
             idx += i;
             fillHole = document.getElementById(idx);
             
-            if(turn > 0){
+           if(turn > 0){
                 fillHole.style.backgroundColor = "black";
+               for(let i = 0; i < 7; i++){
+                    changeColor[i].classList = "redhover";
+                }
+                
             }
             if(turn < 0){
                 fillHole.style.backgroundColor = "red";
+                for(let i = 0; i < 7; i++){
+                    changeColor[i].classList = "blackhover";
+                }           
             }
+            console.log(fillHole);
             gridRow = i;
             addToGrid(idx)
             //console.log(idx);
             //console.log(gridRow, gridColumn)
             turn *= -1;
+            console.log(changeColor);
+            
+            
             winCondition();
             return;
         }
@@ -63,6 +99,8 @@ function render(){
 function checkWinner(){
     if(winCount >= 4){
         console.log(turn + " wins");
+        gameOver = 1;
+        document.getElementById("btn").style.visibility = "visible";
         return;
     }
 }
