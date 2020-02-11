@@ -5,7 +5,8 @@ let grid = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0
 let turn = 1;
 let gridColumn;
 let gridRow;
-let winCount;
+let winCount, distance, counter;
+let columnCounter;
 
 
 //Event Listeners
@@ -18,18 +19,18 @@ document.getElementById('clickables').addEventListener('click', clickGrid);
 
 function clickGrid(){
     idx = parseInt(event.target.id.replace('B',''));
-    console.log(idx);
+    //console.log(idx);
     if(idx != 0){
-        gridRow = idx / 10;
+        gridColumn = idx / 10;
     }else{
-        gridRow = 0;
+        gridColumn = 0;
     }
     render(idx);
 }
 
 function addToGrid(){
-    grid[gridRow][gridColumn] = turn;
-    console.log(grid);
+    grid[gridColumn][gridRow] = turn;
+    //console.log(grid);
 }
 
 
@@ -38,7 +39,7 @@ function render(){
     
     for(let i = 5; i >= 0; i--){
         
-        if(grid[gridRow][i] == 0){
+        if(grid[gridColumn][i] == 0){
             idx += i;
             fillHole = document.getElementById(idx);
             
@@ -48,10 +49,10 @@ function render(){
             if(turn < 0){
                 fillHole.style.backgroundColor = "red";
             }
-            gridColumn = i;
+            gridRow = i;
             addToGrid(idx)
-            console.log(idx);
-            console.log(gridRow, gridColumn)
+            //console.log(idx);
+            //console.log(gridRow, gridColumn)
             turn *= -1;
             winCondition();
             return;
@@ -59,12 +60,110 @@ function render(){
     }
 
 }
+function checkWinner(){
+    if(winCount >= 4){
+        console.log(turn + " wins");
+        return;
+    }
+}
+function reset(){
+    winCount = 1;
+    distance = 1;
+    counter = 1;
+}
 
 function winCondition(){
     
-    console.log(grid[gridRow][gridColumn]);
-    console.log(grid[gridRow][gridColumn + 1]);
     
+    reset();
+    //console.log(gridColumn + 1);
+    //console.log(grid[gridColumn][gridRow]);
+    //console.log(grid[gridColumn + 1][gridRow]);
+    //console.log(gridColumn, gridRow);
+
+    for(let i = 0; i < 2; i++){
+        while(((gridColumn + distance) < 7)  && ((gridColumn + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn + distance][gridRow])){
+            winCount += 1;
+            distance += counter;
+            console.log(winCount);
+        }
+        distance = -1;
+        counter *= -1;
+    }
+     checkWinner();
+     reset();
+
+     for(let i = 0; i < 2; i++){
+        while(((gridRow + distance) < 6)  && ((gridRow + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn][gridRow + distance])){
+            winCount += 1;
+            distance += counter;
+            console.log(winCount);
+        }
+        distance = -1;
+        counter *= -1;
+    }
+    checkWinner();
+    reset();
+    for(let i = 0; i < 2; i++){
+        while(((gridRow + distance) < 6)  && ((gridRow + distance) >= 0) && ((gridColumn + distance) < 7)  && ((gridColumn + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn + distance][gridRow + distance])){
+            winCount += 1;
+            distance += counter;
+            console.log(winCount);
+        }
+        distance = -1;
+        counter *= -1;
+    }
+    checkWinner();
+    reset();
+    for(let i = 0; i < 2; i++){
+        while(((gridRow - distance) < 6)  && ((gridRow - distance) >= 0) && ((gridColumn + distance) < 7)  && ((gridColumn + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn + distance][gridRow - distance])){
+            winCount += 1;
+            distance += counter;
+            console.log(winCount);
+        }
+        distance = -1;
+        counter *= -1;
+    }
+    checkWinner();
+    
+
+ 
+
+
+/*   
+
+    for(let i = 1; (gridRow + i) < 7; i++){
+        if((grid[gridrow][gridColumn]) === (grid[gridRow + i][gridColumn])){
+            winCount +=1;
+            console.log(winCount);
+        }
+    }
+    for(let i = -1; (gridRow + i) >= 0; i--){
+        if((grid[gridRow][gridColumn]) === (grid[gridRow + i][gridColumn])){
+            winCount +=1;
+            console.log(winCount);
+        }
+    }
+
+*/
+
+
+  /*  winCount = 0;
+    let rowCounter;
+    console.log(grid[gridRow][gridColumn]);
+    for(let i = 1; i < 4; i ++){
+        rowCounter = gridRow + i;
+        console.log(rowCounter);
+        console.log(grid[rowCounter][gridColumn]);
+        if((rowCounter) < 7){
+            if((grid[rowCounter][gridColumn]) === (grid[gridRow][gridColumn])){
+                winCount += 1;
+                console.log(winCount);
+            }
+        }
+
+    }
+    */
     
 }
 
