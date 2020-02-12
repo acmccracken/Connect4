@@ -1,8 +1,25 @@
 body{
-    height: 50px;
+    height: 100%;
     align-items: center;
     display: flex;
     flex-direction: column;
+    background-color: rgb(240, 214, 13);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    
+}
+h1{
+    font-size: 85PX;
+    margin-block-start: 0.15em;
+    margin-block-end: 0.15em;
+    outline-width: 2PX;
+    color: cornsilk;
+    -webkit-text-stroke-width: 5px;
+    -webkit-text-stroke-color: blue;
+    
+}
+div{
+    color: blue;
 }
 
 table.board{
@@ -21,7 +38,7 @@ th{
 	border-left: 24px solid transparent;
 	border-right: 24px solid transparent;
 	border-top: 40px solid blue;
-    background-color: white;
+    background-color: rgb(240, 214, 13);
     cursor:pointer; 
 }
 .blackhover:hover{
@@ -30,17 +47,44 @@ th{
 .redhover:hover{
     border-top: 40px solid red;
 }
+.bluehover:hover{
+    border-top: 40px solid blue;
+}
 
 td{
-    border: 2px solid black;
+    border: 2px solid blue;
     height: 40px;
     width: 40px;
-    background-color: white;
+    background-color: rgb(240, 214, 13);
     border-radius: 40px;
 }
-button{
+div{
     font-size: 28px;
-    margin: 20px;
+}
+.buttonpicker{
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    flex-direction: row;
+    margin: 10px;
+    outline: 44px;
+}
+#choosered{
+    background-color: red;
+    cursor: pointer;
+}
+#chooseblack{
+    background-color: black;
+    cursor: pointer;
+}
+#btn{
+    font-size: 28px;
+    margin-top: 20px;
     border-radius: 5px;
     visibility: hidden;
+}
+section{
+    border-width: 10px;
+    border-color: black;
+    background-color: blue;
 }
