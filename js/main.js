@@ -8,9 +8,10 @@ let gridRow;
 let winCount, distance, counter;
 let columnCounter;
 let gameOver;
+let gameCounter;
 //Cached Elements
 let changeColor = document.querySelectorAll('th.blackhover');
-let changeStatement = document.getElementById('winStatement');
+let changeStatement = document.querySelector('h1');
 
 //Event Listeners
 document.getElementById('clickables').addEventListener('click', clickGrid);
@@ -29,6 +30,7 @@ function init(){
     for(let i = 0; i < 7; i++){
         changeColor[i].classList = "bluehover";
     }
+    gameCounter = 0;
 }
 function startRed(){
 turn = -1;
@@ -54,7 +56,6 @@ function clickGrid(){
     if(gameOver === 1){
         return;
     }
-    //console.log(idx);
     if(idx != 0){
         gridColumn = idx / 10;
     }else{
@@ -65,12 +66,13 @@ function clickGrid(){
 
 function addToGrid(){
     grid[gridColumn][gridRow] = turn;
-    //console.log(grid);
 }
 
 function replay(){
     document.getElementById("btn").style.visibility = "hidden";
     document.querySelector("div").style.visibility = "visible";
+    changeStatement.textContent = "Connect 4";
+    changeStatement.style.webkitTextStrokeColor = "blue";
 
     grid = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
 
@@ -108,15 +110,9 @@ function render(){
                     changeColor[i].classList = "blackhover";
                 }           
             }
-            console.log(fillHole);
             gridRow = i;
             addToGrid(idx)
-            //console.log(idx);
-            //console.log(gridRow, gridColumn)
             turn *= -1;
-            console.log(changeColor);
-            
-            
             winCondition();
             return;
         }
@@ -125,10 +121,28 @@ function render(){
 }
 function checkWinner(){
     if(winCount >= 4){
-        console.log(turn + " wins");
-        gameOver = 1;
+        if(turn > 0){
+            changeStatement.textContent = "Red Wins";
+            changeStatement.style.webkitTextStrokeColor = "red";
+        }
+        if(turn < 0){
+            changeStatement.textContent = "Black Wins";
+            changeStatement.style.webkitTextStrokeColor = "black";
+        }
         document.getElementById("btn").style.visibility = "visible";
+        gameOver = 1;
+        return;
         
+    }
+}
+function turnCounter(){
+    gameCounter+= 1;
+    if(gameCounter === 42){
+        gameOver = 1;
+        document.getElementById("btn").style.visibility = "visible"; 
+        for(let i = 0; i < 7; i++){
+            changeColor[i].classList = "bluehover";
+        }
     }
 }
 function reset(){
@@ -139,18 +153,12 @@ function reset(){
 
 function winCondition(){
     
-    
     reset();
-    //console.log(gridColumn + 1);
-    //console.log(grid[gridColumn][gridRow]);
-    //console.log(grid[gridColumn + 1][gridRow]);
-    //console.log(gridColumn, gridRow);
 
     for(let i = 0; i < 2; i++){
         while(((gridColumn + distance) < 7)  && ((gridColumn + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn + distance][gridRow])){
             winCount += 1;
             distance += counter;
-            console.log(winCount);
         }
         distance = -1;
         counter *= -1;
@@ -162,7 +170,6 @@ function winCondition(){
         while(((gridRow + distance) < 6)  && ((gridRow + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn][gridRow + distance])){
             winCount += 1;
             distance += counter;
-            console.log(winCount);
         }
         distance = -1;
         counter *= -1;
@@ -173,7 +180,6 @@ function winCondition(){
         while(((gridRow + distance) < 6)  && ((gridRow + distance) >= 0) && ((gridColumn + distance) < 7)  && ((gridColumn + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn + distance][gridRow + distance])){
             winCount += 1;
             distance += counter;
-            console.log(winCount);
         }
         distance = -1;
         counter *= -1;
@@ -184,184 +190,10 @@ function winCondition(){
         while(((gridRow - distance) < 6)  && ((gridRow - distance) >= 0) && ((gridColumn + distance) < 7)  && ((gridColumn + distance) >= 0) && (grid[gridColumn][gridRow] === grid[gridColumn + distance][gridRow - distance])){
             winCount += 1;
             distance += counter;
-            console.log(winCount);
         }
         distance = -1;
         counter *= -1;
     }
     checkWinner();
-    
-
- 
-
-
-/*   
-    for(let i = 1; (gridRow + i) < 7; i++){
-        if((grid[gridrow][gridColumn]) === (grid[gridRow + i][gridColumn])){
-            winCount +=1;
-            console.log(winCount);
-        }
-    }
-    for(let i = -1; (gridRow + i) >= 0; i--){
-        if((grid[gridRow][gridColumn]) === (grid[gridRow + i][gridColumn])){
-            winCount +=1;
-            console.log(winCount);
-        }
-    }
-*/
-
-
-  /*  winCount = 0;
-    let rowCounter;
-    console.log(grid[gridRow][gridColumn]);
-    for(let i = 1; i < 4; i ++){
-        rowCounter = gridRow + i;
-        console.log(rowCounter);
-        console.log(grid[rowCounter][gridColumn]);
-        if((rowCounter) < 7){
-            if((grid[rowCounter][gridColumn]) === (grid[gridRow][gridColumn])){
-                winCount += 1;
-                console.log(winCount);
-            }
-        }
-    }
-    */
-    
+    turnCounter();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-let grid = [[00, 01, 02, 03, 04, 05, 06], [10,11, 12, 13, 14, 15, 16], [20, 21, 22, 23, 24, 25, 26], [30, 31, 32, 33, 34, 35, 36], [40, 41, 42, 43, 44, 45, 46], [50, 51, 52, 53, 54, 55, 56]];
-console.log(grid);
-let horz = 0;
-let vert = 0;
-let a = 6, b = 7, c, i, j, k, l, m, n, o, y, z;
-function switchEm(i, j){
-    l = i;
-    i = j;
-    j = l;
-}
-for(x = 0; x < 4; x ++){
-    for(i = 0, m = 2, k = 3; i < a; i++){
-        horz = 0;
-        if(x === 2){
-            
-                n = m;
-            z = i, y = j;
-            l = i - 2;
-            if(l < 0){
-                l = 0;
-            }if(n < 0){
-                n = 0;
-            }
-        }
-        if(x === 3){   
-            z = i, y = j;
-            l = i - 2;
-            o = k;
-            if(l < 0){
-            l = 0;
-            }if(o > 5){
-            o = 5;
-            }
-    }
-        for(j = 0; j < b; j++){
-            if(x === 1){
-                l = i;
-                i = j;
-                j = l;
-            }
-            if(x === 2){
-                z = i, y = j;
-                i = n, j = l;
-            }
-            if(x === 3){
-                z = i, y = j;
-                i = o, j = l;
-            }
-                //console.log(l);
-                //console.log(n);
-            if((x < 2) || ((x === 2) && (n < 6) && ( l < 7))  || ((x === 3) && (o >= 0) && ( l < 7))){
-                //console.log(l);
-                //console.log(j);
-                console.log(grid[i][j]);
-                if(horz >= 0){
-                    if(grid[i][j] === 1){
-                        horz+= 1;
-                    }else if(grid[i][j] === -1){
-                        horz = -1;
-                    }else if(grid[i][j] === 0){
-                        horz = 0;
-                    }
-                }else if(horz <= 0){
-                    if(grid[i][j] === -1){
-                        horz += -1;
-                    }else if(grid[i][j] === 1){
-                        horz = 1;
-                    }else if(grid[i][j] === 0){
-                        horz = 0;
-                    }
-                }
-            }
-            console.log(horz)
-            if(horz ===4){
-            console.log(" 1's wins")
-            }
-            if(horz ===-4){
-            console.log(" -1's wins")
-            }   
-            
-           if(x === 1){
-            l = i;
-            i = j;
-            j = l;
-            }if(x === 2){
-            console.log(l);
-            console.log(n);
-            i = z;
-            j = y;
-            l++, n++;
-            }
-            if(x === 3){
-            console.log(l);
-            i = z;
-            j = y;
-            l++, o--;
-            }
-            
-        }
-        m--;
-        k++;
-        
-    }
-    if(x === 0){
-        a++;
-        b--;
-    }if(x === 1){
-        a--;
-    }
-}
-*/ 
