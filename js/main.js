@@ -2,7 +2,7 @@
 let grid = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
 
 //variables
-let turn = 1;
+let turn;
 let gridColumn;
 let gridRow;
 let winCount, distance, counter;
@@ -10,10 +10,14 @@ let columnCounter;
 let gameOver;
 //Cached Elements
 let changeColor = document.querySelectorAll('th.blackhover');
+let changeStatement = document.getElementById('winStatement');
 
 //Event Listeners
 document.getElementById('clickables').addEventListener('click', clickGrid);
 document.getElementById('btn').addEventListener('click', replay);
+document.getElementById('choosered').addEventListener('click', startRed);
+document.getElementById('chooseblack').addEventListener('click', startBlack);
+
 
 
 
@@ -21,7 +25,28 @@ document.getElementById('btn').addEventListener('click', replay);
 init();
 
 function init(){
-    gameOver = 0;
+    gameOver = 1;
+    for(let i = 0; i < 7; i++){
+        changeColor[i].classList = "bluehover";
+    }
+}
+function startRed(){
+turn = -1;
+gameOver = 0;
+document.querySelector("div").style.visibility = "hidden";
+for(let i = 0; i < 7; i++){
+    changeColor[i].classList = "redhover";
+}
+
+}
+function startBlack(){
+turn = 1;
+gameOver = 0;
+document.querySelector("div").style.visibility = "hidden";
+for(let i = 0; i < 7; i++){
+    changeColor[i].classList = "blackhover";
+}  
+
 }
 
 function clickGrid(){
@@ -45,13 +70,15 @@ function addToGrid(){
 
 function replay(){
     document.getElementById("btn").style.visibility = "hidden";
+    document.querySelector("div").style.visibility = "visible";
+
     grid = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
 
     for(i = 0; i < 70; i += 10){
         for(j = 0; j < 6; j ++){
         idx = i + j;
         fillHole = document.getElementById(idx);
-        fillHole.style.backgroundColor = "white";
+        fillHole.style.backgroundColor = "rgb(240, 214, 13)";
         }
     }
     init();
@@ -101,7 +128,7 @@ function checkWinner(){
         console.log(turn + " wins");
         gameOver = 1;
         document.getElementById("btn").style.visibility = "visible";
-        return;
+        
     }
 }
 function reset(){
@@ -169,7 +196,6 @@ function winCondition(){
 
 
 /*   
-
     for(let i = 1; (gridRow + i) < 7; i++){
         if((grid[gridrow][gridColumn]) === (grid[gridRow + i][gridColumn])){
             winCount +=1;
@@ -182,7 +208,6 @@ function winCondition(){
             console.log(winCount);
         }
     }
-
 */
 
 
@@ -199,7 +224,6 @@ function winCondition(){
                 console.log(winCount);
             }
         }
-
     }
     */
     
@@ -235,13 +259,11 @@ console.log(grid);
 let horz = 0;
 let vert = 0;
 let a = 6, b = 7, c, i, j, k, l, m, n, o, y, z;
-
 function switchEm(i, j){
     l = i;
     i = j;
     j = l;
 }
-
 for(x = 0; x < 4; x ++){
     for(i = 0, m = 2, k = 3; i < a; i++){
         horz = 0;
@@ -341,6 +363,5 @@ for(x = 0; x < 4; x ++){
     }if(x === 1){
         a--;
     }
-
 }
 */ 

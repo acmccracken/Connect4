@@ -9,7 +9,8 @@
 </head>
 <body>
     <h1>Connect 4</h1>
-
+    <div id="statement">Pick your color<button class="buttonpicker" id='choosered'></button><button class='buttonpicker' id='chooseblack'></button></div>
+<section>
     <table class="board" id = "grid">
         <tr id ="clickables">
             <th class="blackhover" id ="B00"></th>
@@ -20,6 +21,7 @@
             <th class="blackhover" id ="B50"></th>
             <th class="blackhover" id ="B60"></th>
         </tr>
+        
         <tr>
             <td id="0"></td>
             <td id="10"></td>
@@ -75,8 +77,10 @@
             <td id="65"></td>
         </tr>
         
-    </table>    
+    </table>  
+</section>
     <button id = "btn">Play Again</button>
+    <div id ="winStatement"><div>
 
 <script defer src="js/main.js"></script>
     
