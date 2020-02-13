@@ -9,6 +9,8 @@ let winCount, distance, counter;
 let columnCounter;
 let gameOver;
 let gameCounter;
+let winSound = new Audio('/Users/alanmccracken/code/connect4/sounds/winSound.m4a');
+let playSound = new Audio('/Users/alanmccracken/code/connect4/sounds/play sound.wav');
 //Cached Elements
 let changeColor = document.querySelectorAll('th.blackhover');
 let changeStatement = document.querySelector('h1');
@@ -69,6 +71,7 @@ function addToGrid(){
 }
 
 function replay(){
+    winSound.play();
     document.getElementById("btn").style.visibility = "hidden";
     document.querySelector("div").style.visibility = "visible";
     changeStatement.textContent = "Connect 4";
@@ -111,6 +114,7 @@ function render(){
                 }           
             }
             gridRow = i;
+            playSound.play();
             addToGrid(idx)
             turn *= -1;
             winCondition();
