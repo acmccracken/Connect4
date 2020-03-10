@@ -53,11 +53,40 @@ th{
 
 td{
     border: 2px solid blue;
+<<<<<<< HEAD
     height: 40px;
     width: 40px;
     background-color: rgb(240, 214, 13);
     border-radius: 40px;
 }
+div{
+    font-size: 28px;
+}
+.buttonpicker{
+    height: 40px;
+    width: 40px;
+=======
+    height: 40px;
+    width: 40px;
+    background-color: rgb(240, 214, 13);
+>>>>>>> master
+    border-radius: 40px;
+    flex-direction: row;
+    margin: 10px;
+    outline: 44px;
+}
+#choosered{
+    background-color: red;
+    cursor: pointer;
+}
+<<<<<<< HEAD
+#chooseblack{
+    background-color: black;
+    cursor: pointer;
+}
+#btn{
+    font-size: 28px;
+=======
 div{
     font-size: 28px;
 }
@@ -79,6 +108,7 @@ div{
 }
 #btn{
     font-size: 28px;
+>>>>>>> master
     margin-top: 20px;
     border-radius: 5px;
     visibility: hidden;
@@ -87,4 +117,8 @@ section{
     border-width: 10px;
     border-color: black;
     background-color: blue;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
