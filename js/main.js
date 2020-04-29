@@ -13,11 +13,7 @@ let winSound = new Audio('/Users/alanmccracken/code/connect4/sounds/winSound.m4a
 let playSound = new Audio('/Users/alanmccracken/code/connect4/sounds/play sound.wav');
 //Cached Elements
 let changeColor = document.querySelectorAll('th.blackhover');
-<<<<<<< HEAD
-let changeStatement = document.getElementById('winStatement');
-=======
 let changeStatement = document.querySelector('h1');
->>>>>>> master
 
 //Event Listeners
 document.getElementById('clickables').addEventListener('click', clickGrid);
@@ -36,26 +32,6 @@ function init(){
     for(let i = 0; i < 7; i++){
         changeColor[i].classList = "bluehover";
     }
-<<<<<<< HEAD
-}
-function startRed(){
-turn = -1;
-gameOver = 0;
-document.querySelector("div").style.visibility = "hidden";
-for(let i = 0; i < 7; i++){
-    changeColor[i].classList = "redhover";
-}
-
-}
-function startBlack(){
-turn = 1;
-gameOver = 0;
-document.querySelector("div").style.visibility = "hidden";
-for(let i = 0; i < 7; i++){
-    changeColor[i].classList = "blackhover";
-}  
-
-=======
     gameCounter = 0;
 }
 //responds to 'click' on red game peice, starts game as red, renders
@@ -68,7 +44,6 @@ for(let i = 0; i < 7; i++){
         changeColor[i].classList = "redhover";
     }
 //responds to click on black game peice
->>>>>>> master
 }
 function startBlack(){
     turn = 1;
@@ -102,25 +77,16 @@ function replay(){
     winSound.play();
     document.getElementById("btn").style.visibility = "hidden";
     document.querySelector("div").style.visibility = "visible";
-<<<<<<< HEAD
-=======
     changeStatement.textContent = "Connect 4";
     changeStatement.style.webkitTextStrokeColor = "blue";
->>>>>>> master
 
     grid = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
 
     for(i = 0; i < 70; i += 10){
         for(j = 0; j < 6; j ++){
-<<<<<<< HEAD
-        idx = i + j;
-        fillHole = document.getElementById(idx);
-        fillHole.style.backgroundColor = "rgb(240, 214, 13)";
-=======
             idx = i + j;
             fillHole = document.getElementById(idx);
             fillHole.style.backgroundColor = "rgb(240, 214, 13)";
->>>>>>> master
         }
     }
     init();
@@ -159,22 +125,6 @@ function render(){
     }
 
 }
-<<<<<<< HEAD
-function checkWinner(){
-    if(winCount >= 4){
-        console.log(turn + " wins");
-        gameOver = 1;
-        document.getElementById("btn").style.visibility = "visible";
-        
-    }
-}
-function reset(){
-    winCount = 1;
-    distance = 1;
-    counter = 1;
-}
-=======
->>>>>>> master
 
 function winCondition(){
     
